@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Onlayn Test Tizimi</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+  <div class="background-decorations">
+    <div class="blob blob-1"></div>
+    <div class="blob blob-2"></div>
+  </div>
+
+  <div class="app-container">
+    <!-- 1. Boshlang'ich sahifa: Ism va Familiya kiritish -->
+    <div id="start-screen" class="card fade-in">
+      <div class="brand-badge">
+        <span class="icon">🐍</span> Python Fanidan Test
+      </div>
+      <h1 class="main-title">Python Bilimingizni Sinang</h1>
+      <p class="subtitle">Python asoslari, String, Arifmetik amallar, Boolean va Shart operatorlari bo'yicha 20 ta test.</p>
+
+      <form id="login-form">
+        <div class="input-group">
+          <label for="firstName">Ismingiz <span class="required">*</span></label>
+          <input 
+            type="text" 
+            id="firstName" 
+            placeholder="Masalan: Aziz" 
+            autocomplete="off" 
+            required
+          >
+        </div>
+
+        <div class="input-group">
+          <label for="lastName">Familiyangiz <span class="required">*</span></label>
+          <input 
+            type="text" 
+            id="lastName" 
+            placeholder="Masalan: Karimov" 
+            autocomplete="off" 
+            required
+          >
+        </div>
+
+        <div class="test-info-box">
+          <div class="info-item">
+            <span class="info-label">Savollar soni:</span>
+            <span class="info-value" id="total-questions-preview">0 ta</span>
+          </div>
+          <div class="info-item">
+            <span class="info-label">Baholash mezoni:</span>
+            <span class="info-value badges">
+              <span class="badge badge-green">Yaxshi (70%+)</span>
+              <span class="badge badge-yellow">O'rtacha (50-69%)</span>
+              <span class="badge badge-red">Yomon (&lt;50%)</span>
+            </span>
+          </div>
+        </div>
+
+        <button type="submit" class="btn btn-primary btn-block">
+          Testni boshlash &rarr;
+        </button>
+      </form>
+    </div>
+
+    <!-- 2. Test topshirish sahifasi -->
+    <div id="quiz-screen" class="card fade-in hidden">
+      <header class="quiz-header">
+        <div class="user-greeting">
+          <span class="avatar" id="user-avatar">👤</span>
+          <div>
+            <div class="greeting-sub">Foydalanuvchi</div>
+            <div class="user-fullname" id="display-fullname">Aziz Karimov</div>
+          </div>
+        </div>
+        <div class="quiz-progress-text">
+          Savol: <span id="current-q-num">1</span> / <span id="total-q-num">5</span>
+        </div>
+      </header>
+
+      <div class="progress-bar-wrapper">
+        <div class="progress-bar" id="progress-bar" style="width: 20%;"></div>
+      </div>
+
+      <div class="question-container">
+        <h2 class="question-title" id="question-text">Savol yuklanmoqda...</h2>
+        <div class="options-list" id="options-container">
+          <!-- Variantlar JS orqali yaratiladi -->
+        </div>
+      </div>
+
+      <footer class="quiz-footer">
+        <button id="prev-btn" class="btn btn-secondary" disabled>
+          &larr; Oldingisi
+        </button>
+        <div class="navigation-controls">
+          <button id="next-btn" class="btn btn-primary">
+            Keyingisi &rarr;
+          </button>
+          <button id="submit-btn" class="btn btn-success hidden">
+            Testni yakunlash &#10003;
+          </button>
+        </div>
+      </footer>
+    </div>
+
+    <!-- 3. Natijalar sahifasi -->
+    <div id="result-screen" class="card fade-in hidden">
+      <div class="result-header">
+        <div class="status-icon" id="status-icon">🏆</div>
+        <h2 class="result-title">Test Yakunlandi!</h2>
+        <p class="result-user" id="result-fullname">Aziz Karimov</p>
+      </div>
+
+      <!-- Baholash kartasi (Rang dinamik o'zgaradi: yaxshi - yashil, o'rtacha - sariq, yomon - qizil) -->
+      <div class="result-summary-card" id="result-summary-card">
+        <div class="status-tag" id="status-tag">Yaxshi</div>
+        
+        <div class="score-display">
+          <div class="percentage" id="result-percent">0%</div>
+          <div class="score-fraction" id="result-fraction">0 / 0 ta to'g'ri</div>
+        </div>
+
+        <p class="status-message" id="status-message">Ajoyib natija ko'rsatdingiz!</p>
+      </div>
+
+      <!-- Savollar tahlili tugmasi -->
+      <div class="result-actions">
+        <button id="toggle-review-btn" class="btn btn-secondary">
+          Xatolarni ko'rib chiqish &#9662;
+        </button>
+        <button id="restart-btn" class="btn btn-primary">
+          Qayta topshirish &#8635;
+        </button>
+      </div>
+
+      <!-- Savollar tahlili (accordion) -->
+      <div id="review-container" class="review-section hidden">
+        <h3 class="review-title">Savollar va sizning javoblaringiz:</h3>
+        <div id="review-list" class="review-list"></div>
+      </div>
+    </div>
+  </div>
+
+  <script src="questions.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
